@@ -1,0 +1,20 @@
+{
+	"sprites": {
+		"knight_idle": {
+			"frames": [
+				"knight/idle/1.png",
+				"knight/idle/2.png",
+				"knight/idle/3.png",
+				"knight/idle/4.png"
+			],
+			"delays": [0.2, 0.2, 0.2, 0.2]
+		}
+	},
+	
+	"fonts": {
+		"base_text": {
+			"filename": "Inconsolata/Inconsolata-Regular.ttf",
+			"size": 16
+		}
+	}
+}
