@@ -8,6 +8,19 @@
 				"knight/idle/4.png"
 			],
 			"delays": [0.2, 0.2, 0.2, 0.2]
+		},
+		"knight_walk": {
+			"frames": [
+				"knight/walk/1.png",
+				"knight/walk/2.png",
+				"knight/walk/3.png",
+				"knight/walk/4.png",
+				"knight/walk/5.png",
+				"knight/walk/6.png",
+				"knight/walk/7.png",
+				"knight/walk/8.png"
+			],
+			"delays": [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
 		}
 	},
 	
