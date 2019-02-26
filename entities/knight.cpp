@@ -11,6 +11,8 @@
 #define KEY_P1_BLOCK        SDL_SCANCODE_COMMA
 
 #define ATTACK_DELAY (1.0f)
+#define H_SPEED (100)
+#define V_SPEED (100)
 
 
 Knight::Knight(Scene *scene, float x, float y, SDL_Color color) :
@@ -20,6 +22,7 @@ Knight::Knight(Scene *scene, float x, float y, SDL_Color color) :
     Resources *resources = scene->get_graphics()->get_resources();
 
     sprite_idle = resources->get_sprite("knight_idle");
+    sprite_walk = resources->get_sprite("knight_walk");
     w = sprite_idle.get_width();
     h = sprite_idle.get_height();
 
@@ -30,16 +33,22 @@ void Knight::handle_inputs(Inputs *inputs) {
 
     float delta = scene->get_delta();
 
+    state = IDLE;
+
     if (inputs->is_key_down(KEY_P1_MOVE_UP)) {
-        
+        state = WALKING;
+        y -= V_SPEED * delta;
     } else if (inputs->is_key_down(KEY_P1_MOVE_DOWN)) {
-        
+        state = WALKING;
+        y += V_SPEED * delta;
     }
 
     if (inputs->is_key_down(KEY_P1_MOVE_LEFT)) {
-        
+        state = WALKING;
+        x -= H_SPEED * delta;
     } else if (inputs->is_key_down(KEY_P1_MOVE_RIGHT)) {
-        
+        state = WALKING;
+        x += H_SPEED * delta;
     }
 
     if (inputs->is_key_down_event(KEY_P1_ATTACK)) {
@@ -51,15 +60,20 @@ void Knight::handle_inputs(Inputs *inputs) {
 
 void Knight::update() {
 
-    handle_inputs(scene->get_inputs());
-
     float delta = scene->get_delta();
-
+    handle_inputs(scene->get_inputs());
     clamp();
 
 }
 
 void Knight::render() {
     float delta = scene->get_delta();
-    sprite_idle.draw(scene->get_graphics()->get_renderer(), this->x, this->y, delta);
+    switch(state) {
+        case IDLE:
+            sprite_idle.draw(scene->get_graphics()->get_renderer(), this->x, this->y, delta);
+            break;
+        case WALKING:
+            sprite_walk.draw(scene->get_graphics()->get_renderer(), this->x, this->y, delta);
+            break;
+    }
 }

@@ -8,10 +8,19 @@
 
 class Knight : public PhysicalEntity {
 
+	enum State {
+    	IDLE,
+    	WALKING
+    };
+
     SDL_Color color;
+    State state;
+    
     Sprite sprite_idle;
+    Sprite sprite_walk;
 
     void handle_inputs(Inputs *inputs);
+
 
 public:
 
