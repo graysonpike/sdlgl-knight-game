@@ -7,7 +7,7 @@
 				"knight/idle/3.png",
 				"knight/idle/4.png"
 			],
-			"delays": [0.2, 0.2, 0.2, 0.2]
+			"delay": 0.2
 		},
 		"knight_walk": {
 			"frames": [
@@ -20,7 +20,7 @@
 				"knight/walk/7.png",
 				"knight/walk/8.png"
 			],
-			"delays": [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
+			"delay": 0.1
 		},
 		"knight_attack": {
 			"frames": [
@@ -35,8 +35,7 @@
 				"knight/attack/9.png",
 				"knight/attack/10.png"
 			],
-			"delays": [0.1
-				, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1],
+			"delay": 0.1,
 			"offset_x": 0,
 			"offset_y": -117,
 			"offset_hflip_x": -117,
