@@ -21,6 +21,26 @@
 				"knight/walk/8.png"
 			],
 			"delays": [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
+		},
+		"knight_attack": {
+			"frames": [
+				"knight/attack/1.png",
+				"knight/attack/2.png",
+				"knight/attack/3.png",
+				"knight/attack/4.png",
+				"knight/attack/5.png",
+				"knight/attack/6.png",
+				"knight/attack/7.png",
+				"knight/attack/8.png",
+				"knight/attack/9.png",
+				"knight/attack/10.png"
+			],
+			"delays": [0.1
+				, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1],
+			"offset_x": 0,
+			"offset_y": -117,
+			"offset_hflip_x": -117,
+			"offset_hflip_y": -117
 		}
 	},
 	

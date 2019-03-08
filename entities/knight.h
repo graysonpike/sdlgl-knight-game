@@ -10,14 +10,24 @@ class Knight : public PhysicalEntity {
 
 	enum State {
     	IDLE,
-    	WALKING
+        WALKING,
+        ATTACKING
+    };
+
+    enum Facing {
+        RIGHT,
+        LEFT
     };
 
     SDL_Color color;
     State state;
+    Facing facing;
+    float attack_timer;
+
     
     Sprite sprite_idle;
     Sprite sprite_walk;
+    Sprite sprite_attack;
 
     void handle_inputs(Inputs *inputs);
 
