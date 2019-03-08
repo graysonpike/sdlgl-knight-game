@@ -11,7 +11,10 @@ class Knight : public PhysicalEntity {
 	enum State {
     	IDLE,
         WALKING,
-        ATTACKING
+        ATTACKING,
+        RAISING_TO_BLOCK,
+        BLOCKING,
+        LOWERING_FROM_BLOCK
     };
 
     enum Facing {
@@ -23,14 +26,20 @@ class Knight : public PhysicalEntity {
     State state;
     Facing facing;
     float attack_timer;
+    float block_transition_timer;
 
     
     Sprite sprite_idle;
     Sprite sprite_walk;
     Sprite sprite_attack;
+    Sprite sprite_block;
+    Sprite sprite_unblock;
+    Texture texture_blocking;
 
     void handle_inputs(Inputs *inputs);
-
+    void move(Inputs *inputs, float delta);
+    void attack();
+    void block();
 
 public:
 
