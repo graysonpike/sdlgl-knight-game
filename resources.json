@@ -40,7 +40,35 @@
 			"offset_y": -117,
 			"offset_hflip_x": -117,
 			"offset_hflip_y": -117
+		},
+		"knight_block": {
+			"frames": [
+				"knight/block/1.png",
+				"knight/block/2.png",
+				"knight/block/3.png",
+				"knight/block/4.png",
+				"knight/block/5.png",
+				"knight/block/6.png",
+				"knight/block/7.png"
+			],
+			"delay": 0.1
+		},
+		"knight_unblock": {
+			"frames": [
+				"knight/block/7.png",
+				"knight/block/6.png",
+				"knight/block/5.png",
+				"knight/block/4.png",
+				"knight/block/3.png",
+				"knight/block/2.png",
+				"knight/block/1.png"
+			],
+			"delay": 0.1
 		}
+	},
+
+	"textures": {
+		"knight_blocking": "knight/block/7.png"
 	},
 	
 	"fonts": {
