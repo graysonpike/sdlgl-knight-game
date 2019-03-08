@@ -62,7 +62,7 @@ void Knight::move(Inputs *inputs, float delta) {
 }
 
 void Knight::attack() {
-    if(state != ATTACKING) {
+    if(state == IDLE || state == WALKING) {
         state = ATTACKING;
         attack_timer = ATTACK_TIME;
         sprite_attack.reset();
