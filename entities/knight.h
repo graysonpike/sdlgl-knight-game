@@ -28,13 +28,8 @@ class Knight : public PhysicalEntity {
     float attack_timer;
     float block_transition_timer;
 
-    
-    Sprite sprite_idle;
-    Sprite sprite_walk;
-    Sprite sprite_attack;
-    Sprite sprite_block;
-    Sprite sprite_unblock;
-    Texture texture_blocking;
+    std::map<std::string, Sprite> sprites;
+    std::map<std::string, Texture> textures;
 
     void handle_inputs(Inputs *inputs);
     void move(Inputs *inputs, float delta);
