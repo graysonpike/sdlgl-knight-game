@@ -25,15 +25,15 @@ Knight::Knight(Scene *scene, float x, float y, SDL_Color color) :
 
     Resources *resources = scene->get_graphics()->get_resources();
 
-    sprite_idle = resources->get_sprite("knight_idle");
-    sprite_walk = resources->get_sprite("knight_walk");
-    sprite_attack = resources->get_sprite("knight_attack");
-    sprite_block = resources->get_sprite("knight_block");
-    sprite_unblock = resources->get_sprite("knight_unblock");
-    texture_blocking = resources->get_texture("knight_blocking");
+    sprites["idle"] = resources->get_sprite("knight_idle");
+    sprites["walk"] = resources->get_sprite("knight_walk");
+    sprites["attack"] = resources->get_sprite("knight_attack");
+    sprites["block"] = resources->get_sprite("knight_block");
+    sprites["unblock"] = resources->get_sprite("knight_unblock");
+    textures["blocking"] = resources->get_texture("knight_blocking");
 
-    w = sprite_idle.get_width();
-    h = sprite_idle.get_height();
+    w = sprites["idle"].get_width();
+    h = sprites["idle"].get_height();
 
     attack_timer = 0;
     block_transition_timer = 0;
@@ -65,7 +65,7 @@ void Knight::attack() {
     if(state == IDLE || state == WALKING) {
         state = ATTACKING;
         attack_timer = ATTACK_TIME;
-        sprite_attack.reset();
+        sprites["attack"].reset();
     }
 }
 
@@ -75,11 +75,11 @@ void Knight::block() {
         case IDLE:
         case WALKING:
             block_transition_timer = RAISE_TO_BLOCK_TIME;
-            sprite_block.reset();
+            sprites["block"].reset();
             state = RAISING_TO_BLOCK;
             break;
         case LOWERING_FROM_BLOCK:
-            sprite_block.set_frame_timer(block_transition_timer);
+            sprites["block"].set_frame_timer(block_transition_timer);
             block_transition_timer = RAISE_TO_BLOCK_TIME - block_transition_timer;
             state = RAISING_TO_BLOCK;
             break;
@@ -128,11 +128,11 @@ void Knight::handle_inputs(Inputs *inputs) {
         switch (state) {
             case BLOCKING:
                 block_transition_timer = LOWER_FROM_BLOCK_TIME;
-                sprite_unblock.reset();
+                sprites["unblock"].reset();
                 state = LOWERING_FROM_BLOCK;
                 break;
             case RAISING_TO_BLOCK:
-                sprite_unblock.set_frame_timer(block_transition_timer);
+                sprites["unblock"].set_frame_timer(block_transition_timer);
                 block_transition_timer = LOWER_FROM_BLOCK_TIME - block_transition_timer;
                 state = LOWERING_FROM_BLOCK;
                 break;
@@ -158,44 +158,44 @@ void Knight::render() {
     switch (state) {
         case IDLE:
             if (facing == RIGHT) {
-                sprite_idle.draw(scene->get_graphics()->get_renderer(), x, y, delta);
+                sprites["idle"].draw(scene->get_graphics()->get_renderer(), x, y, delta);
             } else {
-                sprite_idle.draw(scene->get_graphics()->get_renderer(), x, y, 0.0f, true, false, delta);
+                sprites["idle"].draw(scene->get_graphics()->get_renderer(), x, y, 0.0f, true, false, delta);
             }
             break;
         case WALKING:
             if (facing == RIGHT) {
-                sprite_walk.draw(scene->get_graphics()->get_renderer(), x, y, delta);
+                sprites["walk"].draw(scene->get_graphics()->get_renderer(), x, y, delta);
             } else {
-                sprite_walk.draw(scene->get_graphics()->get_renderer(), x, y, 0.0f, true, false, delta);
+                sprites["walk"].draw(scene->get_graphics()->get_renderer(), x, y, 0.0f, true, false, delta);
             }
             break;
         case ATTACKING:
             if (facing == RIGHT) {
-                sprite_attack.draw(scene->get_graphics()->get_renderer(), x, y, delta);
+                sprites["attack"].draw(scene->get_graphics()->get_renderer(), x, y, delta);
             } else {
-                sprite_attack.draw(scene->get_graphics()->get_renderer(), x, y, 0.0f, true, false, delta);
+                sprites["attack"].draw(scene->get_graphics()->get_renderer(), x, y, 0.0f, true, false, delta);
             }
             break;
         case RAISING_TO_BLOCK:
             if (facing == RIGHT) {
-                sprite_block.draw(scene->get_graphics()->get_renderer(), x, y, delta);
+                sprites["block"].draw(scene->get_graphics()->get_renderer(), x, y, delta);
             } else {
-                sprite_block.draw(scene->get_graphics()->get_renderer(), x, y, 0.0f, true, false, delta);
+                sprites["block"].draw(scene->get_graphics()->get_renderer(), x, y, 0.0f, true, false, delta);
             }
             break;
         case LOWERING_FROM_BLOCK:
             if (facing == RIGHT) {
-                sprite_unblock.draw(scene->get_graphics()->get_renderer(), x, y, delta);
+                sprites["unblock"].draw(scene->get_graphics()->get_renderer(), x, y, delta);
             } else {
-                sprite_unblock.draw(scene->get_graphics()->get_renderer(), x, y, 0.0f, true, false, delta);
+                sprites["unblock"].draw(scene->get_graphics()->get_renderer(), x, y, 0.0f, true, false, delta);
             }
             break;
         case BLOCKING:
             if (facing == RIGHT) {
-                texture_blocking.draw(scene->get_graphics()->get_renderer(), x, y);
+                textures["blocking"].draw(scene->get_graphics()->get_renderer(), x, y);
             } else {
-                texture_blocking.draw(scene->get_graphics()->get_renderer(), x, y, 0.0f, true, false);
+                textures["blocking"].draw(scene->get_graphics()->get_renderer(), x, y, 0.0f, true, false);
             }
             break;
     }
