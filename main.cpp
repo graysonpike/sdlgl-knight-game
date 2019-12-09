@@ -13,6 +13,9 @@
 #include "entities/knight.h"
 
 
+#define KEY_TOGGLE_DEBUG_VISUALS SDL_SCANCODE_TILDE
+
+
 int main() {
 
     srand(time(NULL));
@@ -49,8 +52,13 @@ int main() {
         graphics.present_renderer(clock.get_delta());
 
         // If ESC or 'X' button is pressed, leave the update loop and exit
-        if(inputs.get_quit()) {
+        if (inputs.get_quit()) {
             loop = false;
+        }
+
+        // If tilde key is pressed, toggle debug visuals
+        if (inputs.is_key_down_event(SDL_SCANCODE_GRAVE)) {
+            graphics.toggle_debug_visuals();
         }
 
     }

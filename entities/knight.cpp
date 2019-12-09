@@ -199,4 +199,14 @@ void Knight::render() {
             }
             break;
     }
+
+    if (scene->get_graphics()->get_debug_visuals_enabled()) {
+        SDL_Renderer *renderer = scene->get_graphics()->get_renderer();
+
+        // Draw red square at x, y coords
+        SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+        SDL_Rect box_rect = {(int)x, (int)y, w, h};
+        SDL_RenderDrawRect(renderer, &box_rect);
+    }
+
 }
