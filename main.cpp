@@ -11,6 +11,7 @@
 #include <sdlgl/ui/entity_count.h>
 
 #include "entities/knight.h"
+#include "ui/state_display.h"
 
 
 #define KEY_TOGGLE_DEBUG_VISUALS SDL_SCANCODE_TILDE
@@ -31,12 +32,17 @@ int main() {
 
     // Create and populate scene
     Scene scene(&inputs, &graphics);
+    Knight *knight = new Knight(
+        &scene, 100, 100, {255, 255, 255, 255});
     scene.add_entity(new FPS_Display(
         &scene, "base_text", {0, 0, 0, 255}));
     scene.add_entity(new EntityCount(
         &scene, "base_text", {0, 0, 0, 255}));
-    scene.add_entity(new Knight(
-        &scene, 100, 100, {255, 255, 255, 255}));
+    scene.add_entity(new StateDisplay(
+        &scene, "base_text", {0, 0, 0, 255}, knight));
+    scene.add_entity(knight);
+
+
 
     // Enter a simple update loop
     bool loop = true;

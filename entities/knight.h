@@ -8,6 +8,8 @@
 
 class Knight : public PhysicalEntity {
 
+    static const char* state_strings[];
+
 	enum State {
     	IDLE,
         WALKING,
@@ -41,6 +43,7 @@ public:
     Knight(Scene *scene, float x, float y, SDL_Color color);
     void update();
     void render();
+    std::string get_state();
 
 };
 

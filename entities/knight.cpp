@@ -11,8 +11,8 @@
 #define KEY_P1_BLOCK        SDL_SCANCODE_PERIOD
 
 #define ATTACK_TIME (1.0f)
-#define RAISE_TO_BLOCK_TIME (0.6f)
-#define LOWER_FROM_BLOCK_TIME (0.6f)
+#define RAISE_TO_BLOCK_TIME (0.3f)
+#define LOWER_FROM_BLOCK_TIME (0.3f)
 #define H_SPEED (100)
 #define V_SPEED (100)
 
@@ -38,6 +38,21 @@ Knight::Knight(Scene *scene, float x, float y, SDL_Color color) :
     attack_timer = 0;
     block_transition_timer = 0;
 
+}
+
+
+const char* Knight::state_strings[] = {
+    "IDLE",
+    "WALKING",
+    "ATTACKING",
+    "RAISING_TO_BLOCK",
+    "BLOCKING",
+    "LOWERING_FROM_BLOCK"
+};
+
+
+std::string Knight::get_state() {
+    return state_strings[state];
 }
 
 
