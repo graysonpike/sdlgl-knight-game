@@ -32,6 +32,9 @@ Knight::Knight(Scene *scene, float x, float y, SDL_Color color) :
     sprites["unblock"] = resources->get_sprite("knight_unblock");
     textures["blocking"] = resources->get_texture("knight_blocking");
 
+    sprites["block"].set_delay(RAISE_TO_BLOCK_TIME / 6.0f);
+    sprites["unblock"].set_delay(LOWER_FROM_BLOCK_TIME / 6.0f);
+
     w = sprites["idle"].get_width();
     h = sprites["idle"].get_height();
 
