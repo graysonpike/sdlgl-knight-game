@@ -7,7 +7,11 @@
 				"knight/idle/3.png",
 				"knight/idle/4.png"
 			],
-			"delay": 0.2
+			"delay": 0.2,
+			"offset_x": -40,
+			"offset_y": -10,
+			"offset_hflip_x": -40,
+			"offset_hflip_y": -10
 		},
 		"knight_walk": {
 			"frames": [
@@ -20,7 +24,11 @@
 				"knight/walk/7.png",
 				"knight/walk/8.png"
 			],
-			"delay": 0.1
+			"delay": 0.1,
+			"offset_x": -40,
+			"offset_y": -10,
+			"offset_hflip_x": -40,
+			"offset_hflip_y": -10
 		},
 		"knight_attack": {
 			"frames": [
@@ -36,10 +44,10 @@
 				"knight/attack/10.png"
 			],
 			"delay": 0.1,
-			"offset_x": 0,
-			"offset_y": -117,
-			"offset_hflip_x": -117,
-			"offset_hflip_y": -117
+			"offset_x": -40,
+			"offset_y": -127,
+			"offset_hflip_x": -157,
+			"offset_hflip_y": -127
 		},
 		"knight_block": {
 			"frames": [
@@ -51,7 +59,11 @@
 				"knight/block/6.png",
 				"knight/block/7.png"
 			],
-			"delay": 0.1
+			"delay": 0.1,
+			"offset_x": -40,
+			"offset_y": -10,
+			"offset_hflip_x": -40,
+			"offset_hflip_y": -10
 		},
 		"knight_unblock": {
 			"frames": [
@@ -63,12 +75,22 @@
 				"knight/block/2.png",
 				"knight/block/1.png"
 			],
-			"delay": 0.1
+			"delay": 0.1,
+			"offset_x": -40,
+			"offset_y": -10,
+			"offset_hflip_x": -40,
+			"offset_hflip_y": -10
 		}
 	},
 
 	"textures": {
-		"knight_blocking": "knight/block/7.png"
+		"knight_blocking": {
+			"filename": "knight/block/7.png",
+			"offset_x": -40,
+			"offset_y": -10,
+			"offset_hflip_x": -40,
+			"offset_hflip_y": -10
+		}
 	},
 	
 	"fonts": {

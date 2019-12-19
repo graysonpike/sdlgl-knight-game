@@ -15,10 +15,12 @@
 #define LOWER_FROM_BLOCK_TIME (0.3f)
 #define H_SPEED (100)
 #define V_SPEED (100)
+#define WIDTH (50)
+#define HEIGHT (110)
 
 
 Knight::Knight(Scene *scene, float x, float y, SDL_Color color) :
-    PhysicalEntity(scene, x, y, 0, 0),
+    PhysicalEntity(scene, x, y, WIDTH, HEIGHT),
     color(color),
     state(IDLE),
     facing(RIGHT) {
@@ -34,9 +36,6 @@ Knight::Knight(Scene *scene, float x, float y, SDL_Color color) :
 
     sprites["block"].set_delay(RAISE_TO_BLOCK_TIME / 6.0f);
     sprites["unblock"].set_delay(LOWER_FROM_BLOCK_TIME / 6.0f);
-
-    w = sprites["idle"].get_width();
-    h = sprites["idle"].get_height();
 
     attack_timer = 0;
     block_transition_timer = 0;
@@ -221,7 +220,7 @@ void Knight::render() {
     if (scene->get_graphics()->get_debug_visuals_enabled()) {
         SDL_Renderer *renderer = scene->get_graphics()->get_renderer();
 
-        // Draw red square at x, y coords
+        // Draw red rect at x, y coords
         SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
         SDL_Rect box_rect = {(int)x, (int)y, w, h};
         SDL_RenderDrawRect(renderer, &box_rect);
