@@ -175,44 +175,44 @@ void Knight::render() {
     switch (state) {
         case IDLE:
             if (facing == RIGHT) {
-                sprites["idle"].draw(scene->get_graphics()->get_renderer(), x, y, delta);
+                sprites["idle"].draw(scene, x, y, delta);
             } else {
-                sprites["idle"].draw(scene->get_graphics()->get_renderer(), x, y, 0.0f, true, false, delta);
+                sprites["idle"].draw(scene, x, y, 0.0f, true, false, delta);
             }
             break;
         case WALKING:
             if (facing == RIGHT) {
-                sprites["walk"].draw(scene->get_graphics()->get_renderer(), x, y, delta);
+                sprites["walk"].draw(scene, x, y, delta);
             } else {
-                sprites["walk"].draw(scene->get_graphics()->get_renderer(), x, y, 0.0f, true, false, delta);
+                sprites["walk"].draw(scene, x, y, 0.0f, true, false, delta);
             }
             break;
         case ATTACKING:
             if (facing == RIGHT) {
-                sprites["attack"].draw(scene->get_graphics()->get_renderer(), x, y, delta);
+                sprites["attack"].draw(scene, x, y, delta);
             } else {
-                sprites["attack"].draw(scene->get_graphics()->get_renderer(), x, y, 0.0f, true, false, delta);
+                sprites["attack"].draw(scene, x, y, 0.0f, true, false, delta);
             }
             break;
         case RAISING_TO_BLOCK:
             if (facing == RIGHT) {
-                sprites["block"].draw(scene->get_graphics()->get_renderer(), x, y, delta);
+                sprites["block"].draw(scene, x, y, delta);
             } else {
-                sprites["block"].draw(scene->get_graphics()->get_renderer(), x, y, 0.0f, true, false, delta);
+                sprites["block"].draw(scene, x, y, 0.0f, true, false, delta);
             }
             break;
         case LOWERING_FROM_BLOCK:
             if (facing == RIGHT) {
-                sprites["unblock"].draw(scene->get_graphics()->get_renderer(), x, y, delta);
+                sprites["unblock"].draw(scene, x, y, delta);
             } else {
-                sprites["unblock"].draw(scene->get_graphics()->get_renderer(), x, y, 0.0f, true, false, delta);
+                sprites["unblock"].draw(scene, x, y, 0.0f, true, false, delta);
             }
             break;
         case BLOCKING:
             if (facing == RIGHT) {
-                textures["blocking"].draw(scene->get_graphics()->get_renderer(), x, y);
+                textures["blocking"].draw(scene, x, y);
             } else {
-                textures["blocking"].draw(scene->get_graphics()->get_renderer(), x, y, 0.0f, true, false);
+                textures["blocking"].draw(scene, x, y, 0.0f, true, false);
             }
             break;
     }
