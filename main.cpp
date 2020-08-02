@@ -14,59 +14,74 @@
 #include "ui/state_display.h"
 
 
-#define KEY_TOGGLE_DEBUG_VISUALS SDL_SCANCODE_TILDE
+#define KEY_TOGGLE_DEBUG_VISUALS SDL_SCANCODE_GRAVE // Tilde
+
+
+struct Context {
+    Graphics *graphics;
+    Scene *scene;
+    Inputs *inputs;
+    Clock *clock;
+    bool *loop;
+};
+
+
+void game_loop(struct Context context) {
+    context.inputs->update();
+    context.clock->tick();
+    context.graphics->clear_screen({255, 255, 255, 255});
+    
+    context.scene->update(context.clock->get_delta());
+    context.scene->render();
+
+    context.graphics->present_renderer(context.clock->get_delta());
+
+    // If ESC or 'X' button is pressed, leave the update loop and exit
+    if (context.inputs->get_quit()) {
+        *context.loop = false;
+    }
+
+    // If tilde key is pressed, toggle debug visuals
+    if (context.inputs->is_key_down_event(KEY_TOGGLE_DEBUG_VISUALS)) {
+        context.graphics->toggle_debug_visuals();
+    }
+}
 
 
 int main() {
 
     srand(time(NULL));
 
-    Clock clock;
-    Inputs inputs;
+    struct Context context;
+
+    context.clock = new Clock();
+    context.inputs = new Inputs();
 
     // Load a window
-    Graphics graphics(640, 480);
+    context.graphics = new Graphics(640, 480);
 
     // Load resources
-    graphics.get_resources()->load_resources("resources.json");
+    context.graphics->get_resources()->load_resources("resources.json");
 
     // Create and populate scene
-    Scene scene(&inputs, &graphics);
+    context.scene = new Scene(context.inputs, context.graphics);
+
+    // Game entities
     Knight *knight = new Knight(
-        &scene, 100, 100, {255, 255, 255, 255});
-    scene.add_entity(new FPS_Display(
-        &scene, "base_text", {0, 0, 0, 255}));
-    scene.add_entity(new EntityCount(
-        &scene, "base_text", {0, 0, 0, 255}));
-    scene.add_entity(new StateDisplay(
-        &scene, "base_text", {0, 0, 0, 255}, knight));
-    scene.add_entity(knight);
+        context.scene, 100, 100, {255, 255, 255, 255});
+    context.scene->add_entity(knight);
 
+    // UI entities
+    context.scene->add_entity(new FPS_Display(
+        context.scene, "base_text", {0, 0, 0, 255}));
+    context.scene->add_entity(new EntityCount(
+        context.scene, "base_text", {0, 0, 0, 255}));
+    context.scene->add_entity(new StateDisplay(
+        context.scene, "base_text", {0, 0, 0, 255}, knight));
 
-
-    // Enter a simple update loop
-    bool loop = true;
-    while (loop) {
-
-        inputs.update();
-        clock.tick();
-        graphics.clear_screen({255, 255, 255, 255});
-        
-        scene.update(clock.get_delta());
-        scene.render();
-
-        graphics.present_renderer(clock.get_delta());
-
-        // If ESC or 'X' button is pressed, leave the update loop and exit
-        if (inputs.get_quit()) {
-            loop = false;
-        }
-
-        // If tilde key is pressed, toggle debug visuals
-        if (inputs.is_key_down_event(SDL_SCANCODE_GRAVE)) {
-            graphics.toggle_debug_visuals();
-        }
-
+    *context.loop = true;
+    while (*context.loop) {
+        game_loop(context);
     }
 
     return 0;
